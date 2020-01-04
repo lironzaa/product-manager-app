@@ -1,4 +1,19 @@
 <div class="product-details">
-  <p (click)="test()">{{product.name
-    }}</p>
+  <form>
+    <p>{{product.name}} Details</p>
+    <img src="{{product.url}}" style="width: 100px; height: 100px;">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Product Name">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" placeholder="price">
+    </div>
+    <input type="submit" class="btn btn-success" value="Save">
+  </form>
 </div>

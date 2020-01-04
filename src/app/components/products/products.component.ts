@@ -34,9 +34,9 @@ export class ProductsComponent implements OnInit {
   }
 
   selectProductItem(index: number): void {
-    console.log(index);
     this.productsService.startedEditing.next(index);
-    this.router.navigate(['products/1']);
+    const productId = (index + 1);
+    this.router.navigate([`products/${productId}`]);
   }
 
 }

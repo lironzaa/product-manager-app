@@ -8,8 +8,10 @@ import { Product } from './../../../models/products.model';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product;
+  index: string;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.index = `/products/${this.product.id}`;
   }
 }

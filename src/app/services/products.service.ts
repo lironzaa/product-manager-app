@@ -46,10 +46,8 @@ export class ProductsService {
   }
 
   getProduct(index: number) {
-    console.log(index);
-    console.log(this.products);
-    console.log(this.products[index]);
-    return this.products[index];
+    const fixedIndex = (index - 1)
+    return this.products[fixedIndex];
   }
 
   getProductUpdateListener(): Observable<{ products: Product[] }> {

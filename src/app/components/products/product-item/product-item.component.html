@@ -1,5 +1,5 @@
-<div class="product-item">
-  <img src="{{product.thumbnailUrl}}" alt="">
+<div class="product-item" [routerLink]="[index]" routerLinkActive="active">
+  <img src="{{product.thumbnailUrl}}">
   <p>{{product.name}}</p>
   <p>{{product.description}}</p>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from './../../../services/products.service';
 import { Product } from 'src/app/models/products.model';
 
@@ -14,21 +14,14 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private productsService: ProductsService,
-    private router: Router) { }
+  ) { }
 
-  ngOnInit() {
-    console.log('test');
-
+  ngOnInit(): void {
     this.route.firstChild.params.subscribe(
       (params: any) => {
-        console.log(params);
         this.product = this.productsService.getProduct(params.id);
         console.log(this.product);
       }
     )
-  }
-
-  test() {
-    this.router.navigate(['products/2']);
   }
 }
