@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../services/products.service';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/products.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -11,15 +12,31 @@ import { Product } from 'src/app/models/products.model';
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
   private subscription: Subscription;
-  constructor(private productsService: ProductsService) { }
+  editMode = false;
+  editedItemIndex: number;
+  constructor(private productsService: ProductsService,
+    private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.productsService.getProducts();
     this.subscription = this.productsService.getProductUpdateListener()
       .subscribe((productsData: { products: Product[] }) => {
         this.products = productsData.products;
         console.log(this.products);
       });
+    this.subscription = this.productsService.startedEditing
+      .subscribe(
+        (index: number) => {
+          this.editedItemIndex = index;
+          this.editMode = true;
+        }
+      );
+  }
+
+  selectProductItem(index: number): void {
+    console.log(index);
+    this.productsService.startedEditing.next(index);
+    this.router.navigate(['products/1']);
   }
 
 }

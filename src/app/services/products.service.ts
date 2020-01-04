@@ -12,16 +12,15 @@ export class ProductsService {
   private apiUrl = environment.apiUrl;
   private products: Product[] = [];
   private productsUpdated = new Subject<{ products: Product[] }>();
+  startedEditing = new Subject<number>();
   constructor(private http: HttpClient) { }
 
   getProducts(): void {
     this.http.get<any>(this.apiUrl)
       .pipe(map((productsData: any) => {
         return productsData.map(product => {
-          const listItems = {};
           delete product.type;
           if (!product.creationDate) {
-            let type = product.type;
             Object.entries(product).forEach((item: any) => {
               if (typeof (item) === 'object') {
                 if (item[1].length > 0) {
@@ -35,10 +34,7 @@ export class ProductsService {
               }
             })
           }
-          else {
-            this.products.push(product);
-          }
-          return listItems;
+          else { this.products.push(product) }
         })
       }), endWith(this.products))
       .subscribe((transformedProductsData) => {
@@ -47,6 +43,13 @@ export class ProductsService {
           products: this.products
         });
       });
+  }
+
+  getProduct(index: number) {
+    console.log(index);
+    console.log(this.products);
+    console.log(this.products[index]);
+    return this.products[index];
   }
 
   getProductUpdateListener(): Observable<{ products: Product[] }> {

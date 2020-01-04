@@ -4,7 +4,7 @@ export interface Product {
   description?: string,
   price: number,
   creationDate: number,
-  thumbnailImage: string,
-  urlImage: string,
-  type: number
+  thumbnailUrl: string,
+  url: string,
+  type?: number
 }
