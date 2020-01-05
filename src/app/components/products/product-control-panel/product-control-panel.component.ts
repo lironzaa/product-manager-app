@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductsService } from './../../../services/products.service';
 
 @Component({
   selector: 'app-product-control-panel',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductControlPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    private productsService: ProductsService) { }
 
   ngOnInit() {
+  }
+
+  addNewProduct() {
+    this.productsService.createMode.next(true);
+    this.router.navigate([`products/new`]);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductsService } from './../../services/products.service';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/products.model';
@@ -9,11 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   private subscription: Subscription;
-  editMode = false;
-  editedItemIndex: number;
+  showProductDetails: boolean = false;
   constructor(private productsService: ProductsService,
     private router: Router) { }
 
@@ -24,19 +23,21 @@ export class ProductsComponent implements OnInit {
         this.products = productsData.products;
         console.log(this.products);
       });
-    this.subscription = this.productsService.startedEditing
+    this.subscription = this.productsService.showProductDetails
       .subscribe(
-        (index: number) => {
-          this.editedItemIndex = index;
-          this.editMode = true;
+        (showProductDetails: boolean) => {
+          this.showProductDetails = showProductDetails;
         }
       );
   }
 
   selectProductItem(index: number): void {
-    this.productsService.startedEditing.next(index);
+    this.productsService.showProductDetails.next(true);
     const productId = (index + 1);
     this.router.navigate([`products/${productId}`]);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

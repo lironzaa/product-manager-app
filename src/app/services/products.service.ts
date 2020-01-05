@@ -12,7 +12,8 @@ export class ProductsService {
   private apiUrl = environment.apiUrl;
   private products: Product[] = [];
   private productsUpdated = new Subject<{ products: Product[] }>();
-  startedEditing = new Subject<number>();
+  showProductDetails = new Subject<boolean>();
+  createMode = new Subject<boolean>();
   constructor(private http: HttpClient) { }
 
   getProducts(): void {
@@ -39,9 +40,7 @@ export class ProductsService {
       }), endWith(this.products))
       .subscribe((transformedProductsData) => {
         this.products = transformedProductsData;
-        this.productsUpdated.next({
-          products: this.products
-        });
+        this.productsUpdated.next({ products: this.products });
       });
   }
 
@@ -53,4 +52,10 @@ export class ProductsService {
   getProductUpdateListener(): Observable<{ products: Product[] }> {
     return this.productsUpdated.asObservable();
   }
+
+  updateProduct(index: number, product: Product) {
+    this.products[--index] = product;
+    this.productsUpdated.next({ products: this.products });
+  }
+
 }

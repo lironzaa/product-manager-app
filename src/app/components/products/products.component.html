@@ -1,5 +1,5 @@
 <app-product-control-panel class="product-control-panel"></app-product-control-panel>
-<app-product-details *ngIf="editMode" class="product-details-wrapper"></app-product-details>
+<app-product-details *ngIf="showProductDetails" class="product-details-wrapper"></app-product-details>
 <div class="product-item-wrapper">
   <app-product-item (click)="selectProductItem(i)" *ngFor="let product of products; let i = index" [product]="product">
   </app-product-item>
