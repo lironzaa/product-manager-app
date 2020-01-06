@@ -1,7 +1,7 @@
 <div class="product-details">
-  <form #productDetailsForm="ngForm" (ngSubmit)="onSubmit(productDetailsForm)">
+  <form #productDetailsForm="ngForm" (ngSubmit)="onSubmit(productDetailsForm)" class="form-custom">
     <p>{{product.name}} Details</p>
-    <img src="{{product.url}}" style="width: 100px; height: 100px;">
+    <img src="{{product.url}}">
     <div class="form-group">
       <label for="name">Name</label>
       <input required type="text" class="form-control" id="name" name="name" placeholder="Product Name"

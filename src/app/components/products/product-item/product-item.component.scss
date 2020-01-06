@@ -1,10 +1,21 @@
 .product-item{
-  width: 50%;
-  border: 1px black solid;
-  margin-bottom: 10px;
-  padding-left: 20px;
-}
-
-.active{
-  background-color: #9FC5F8;
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid black;
+  margin-top: 10px;
+  margin: 17px 10px 10px 10px;
+  img {
+    justify-self: flex-start;
+    padding: 7px;
+  }
+  .item-content {
+    align-self: center;
+    margin-left: 40px;
+  }
+  .del-btn {
+    align-self: flex-end;
+    float: right;
+    flex-grow: 5;
+    padding: 7px;
+  }
 }

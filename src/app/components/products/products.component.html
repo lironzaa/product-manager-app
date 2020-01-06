@@ -1,6 +1,8 @@
-<app-product-control-panel class="product-control-panel"></app-product-control-panel>
-<app-product-details *ngIf="showProductDetail" class="product-details-wrapper"></app-product-details>
-<div class="product-item-wrapper">
+<div class="product-item-container">
+  <app-product-control-panel class="control-panel"></app-product-control-panel>
   <app-product-item (click)="selectProductItem(i)" *ngFor="let product of products; let i = index" [product]="product">
   </app-product-item>
+</div>
+<div class="product-details-container">
+  <app-product-details *ngIf="showProductDetail"></app-product-details>
 </div>
