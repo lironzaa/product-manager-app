@@ -8,13 +8,9 @@
 </div>
 <div class="product-control-panel-item">
   <div class="form-group form-inline">
-    <label class="product-control-panel-item__label" for="exampleFormControlSelect1">Sort by</label>
-    <select class="form-control product-control-panel-item__select" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+    <label for="select">Sort by</label>
+    <select class="form-control product-control-panel-item__select" id="select">
+      <option *ngFor="let item of selectOptions" [value]="item">{{item}}</option>
     </select>
   </div>
 </div>

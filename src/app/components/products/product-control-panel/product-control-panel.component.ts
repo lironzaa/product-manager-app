@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-control-panel.component.scss']
 })
 export class ProductControlPanelComponent implements OnInit {
-
+  selectOptions: string[];
   constructor() { }
 
   ngOnInit() {
+    this.selectOptions = ['Name', 'Price'];
   }
 
 }
