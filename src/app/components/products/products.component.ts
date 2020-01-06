@@ -25,8 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subscription = this.productsService.showProductDetail.subscribe(
       (showProductDetail: boolean) => {
         this.showProductDetail = showProductDetail;
-      }
-    )
+      });
   }
 
   selectProductItem(index: number): void {

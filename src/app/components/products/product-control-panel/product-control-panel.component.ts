@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProductsService } from './../../../services/products.service';
 
 @Component({
   selector: 'app-product-control-panel',
@@ -9,15 +7,9 @@ import { ProductsService } from './../../../services/products.service';
 })
 export class ProductControlPanelComponent implements OnInit {
 
-  constructor(private router: Router,
-    private productsService: ProductsService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  addNewProduct() {
-    this.productsService.showProductDetail.next(true);
-    this.router.navigate([`products/0`]);
   }
 
 }
