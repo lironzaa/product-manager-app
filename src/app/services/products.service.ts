@@ -54,6 +54,7 @@ export class ProductsService {
 
   updateProduct(index: number, product: Product) {
     this.products[--index] = product;
+    console.log(this.products);
     this.productsUpdated.next({ products: this.products });
   }
 

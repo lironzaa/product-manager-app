@@ -4,8 +4,14 @@
     <img src="{{product.url}}" style="width: 100px; height: 100px;">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="Product Name"
-        [(ngModel)]="product.name">
+      <input required type="text" class="form-control" id="name" name="name" placeholder="Product Name"
+        [(ngModel)]="product.name" #nameInput="ngModel"
+        [ngClass]="{'is-invalid':nameInput.errors && nameInput.touched}">
+      <div *ngIf="nameInput.touched && nameInput.invalid">
+        <p class="form-text text-danger" *ngIf="nameInput.errors.required">
+          Product name is required
+        </p>
+      </div>
     </div>
     <div class="form-group">
       <label for="description">Description</label>
@@ -14,8 +20,17 @@
     </div>
     <div class="form-group">
       <label for="price">Price</label>
-      <input type="number" class="form-control" id="price" placeholder="price" [(ngModel)]="product.price" name="price">
+      <input required min="1" max="10" type="number" class="form-control" id="price" placeholder="price"
+        [(ngModel)]="product.price" name="price" #priceInput="ngModel">
+      <div *ngIf="priceInput.touched && priceInput.invalid">
+        <p class="form-text text-danger" *ngIf="priceInput.errors.required">
+          Price is required
+        </p>
+        <p class="form-text text-danger" *ngIf="priceInput.errors.min">
+          Price must be greater than 0
+        </p>
+      </div>
     </div>
-    <input type="submit" class="btn btn-success" value="Save">
+    <input [disabled]="!productDetailsForm.valid" type="submit" class="btn btn-success" value="Save">
   </form>
 </div>

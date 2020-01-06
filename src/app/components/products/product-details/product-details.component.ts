@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductsService } from './../../../services/products.service';
 import { Product } from 'src/app/models/products.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -14,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private productsService: ProductsService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class ProductDetailsComponent implements OnInit {
   onSubmit({ valid }): void {
     console.log(this.productIndex);
     this.productsService.updateProduct(this.product.id, this.product);
+    this.toastr.success(`Thank you for updating product ${this.product.name}`, 'Product updated!');
   }
 
 }
