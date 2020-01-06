@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   private subscription: Subscription;
-  showProductDetails: boolean = false;
+  showProductDetail: boolean = false;
   constructor(private productsService: ProductsService,
     private router: Router) { }
 
@@ -21,18 +21,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subscription = this.productsService.getProductUpdateListener()
       .subscribe((productsData: { products: Product[] }) => {
         this.products = productsData.products;
-        console.log(this.products);
       });
-    this.subscription = this.productsService.showProductDetails
-      .subscribe(
-        (showProductDetails: boolean) => {
-          this.showProductDetails = showProductDetails;
-        }
-      );
+    this.subscription = this.productsService.showProductDetail.subscribe(
+      (showProductDetail: boolean) => {
+        this.showProductDetail = showProductDetail;
+      }
+    )
   }
 
   selectProductItem(index: number): void {
-    this.productsService.showProductDetails.next(true);
+    this.productsService.showProductDetail.next(true);
     const productId = (index + 1);
     this.router.navigate([`products/${productId}`]);
   }

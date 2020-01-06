@@ -12,8 +12,7 @@ export class ProductsService {
   private apiUrl = environment.apiUrl;
   private products: Product[] = [];
   private productsUpdated = new Subject<{ products: Product[] }>();
-  showProductDetails = new Subject<boolean>();
-  createMode = new Subject<boolean>();
+  showProductDetail = new Subject<boolean>();
   constructor(private http: HttpClient) { }
 
   getProducts(): void {

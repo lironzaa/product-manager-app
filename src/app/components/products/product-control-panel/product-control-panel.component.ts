@@ -16,8 +16,8 @@ export class ProductControlPanelComponent implements OnInit {
   }
 
   addNewProduct() {
-    this.productsService.createMode.next(true);
-    this.router.navigate([`products/new`]);
+    this.productsService.showProductDetail.next(true);
+    this.router.navigate([`products/0`]);
   }
 
 }
