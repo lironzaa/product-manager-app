@@ -1,10 +1,12 @@
 <div class="product-item" [routerLink]="[index]" routerLinkActive="active">
-  <img src="{{product.thumbnailUrl}}">
-  <div class="item-content">
-    <h3>{{product.name}}</h3>
-    <p>{{product.description}}</p>
+  <div class="main-content">
+    <img src="{{product.thumbnailUrl}}">
+    <div class="item-content">
+      <h3>{{product.name}}</h3>
+      <p>{{product.description}}</p>
+    </div>
   </div>
-  <div class="del-btn">
+  <div class="btn-container">
     <button class="btn btn-warning">Delete</button>
   </div>
 </div>
