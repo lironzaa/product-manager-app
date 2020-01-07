@@ -17,8 +17,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.productsService.getProducts();
-    this.subscription = this.productsService.getProductUpdateListener()
+    this.productsService.fetchProducts();
+    this.subscription = this.productsService.productsUpdated
       .subscribe((productsData: { products: Product[] }) => {
         this.products = productsData.products;
       });

@@ -10,11 +10,11 @@ export class ProductControlPanelComponent implements OnInit {
   selectOptions: string[];
   constructor(private productsService: ProductsService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.selectOptions = ['Select Value', 'Name', 'Price'];
   }
 
-  onSelect(selectedSortOption) {
+  onSelect(selectedSortOption): void {
     this.productsService.sortProducts(selectedSortOption);
   }
 

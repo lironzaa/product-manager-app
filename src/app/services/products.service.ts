@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Product } from '../models/products.model';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map, endWith } from 'rxjs/operators';
 
 @Injectable({
@@ -11,11 +11,11 @@ import { map, endWith } from 'rxjs/operators';
 export class ProductsService {
   private apiUrl = environment.apiUrl;
   private products: Product[] = [];
-  private productsUpdated = new Subject<{ products: Product[] }>();
+  productsUpdated = new Subject<{ products: Product[] }>();
   showProductDetail = new Subject<boolean>();
   constructor(private http: HttpClient) { }
 
-  getProducts(): void {
+  fetchProducts(): void {
     this.http.get<any>(this.apiUrl)
       .pipe(map((productsData: any) => {
         return productsData.map(product => {
@@ -38,36 +38,26 @@ export class ProductsService {
         })
       }), endWith(this.products))
       .subscribe((transformedProductsData) => {
-        this.products = transformedProductsData;
-        this.productsUpdated.next({ products: this.products });
+        this.setProducts(transformedProductsData);
       });
   }
 
-  getProduct(index: number) {
+  getProduct(index: number): Product {
     const fixedIndex = (index - 1);
     return this.products[fixedIndex];
   }
 
-  getProductUpdateListener(): Observable<{ products: Product[] }> {
-    return this.productsUpdated.asObservable();
-  }
-
-  updateProduct(index: number, product: Product) {
-    console.log(this.products);
-    const fixedIndex = (index - 1);
-    this.products[fixedIndex] = product;
-    console.log(this.products);
-    console.log(fixedIndex);
-    this.productsUpdated.next({ products: this.products });
-  }
-
-  sortProducts(selectedSortOption) {
-    console.log(selectedSortOption);
+  sortProducts(selectedSortOption): void {
     if (selectedSortOption === 'Name') {
       this.products.sort((a, b) => a.name.localeCompare(b.name));
     } else if (selectedSortOption === 'Price') {
       this.products = this.products.sort((a, b) => a.price - b.price);
     }
+  }
+
+  setProducts(products: Product[]): void {
+    this.products = products;
+    this.productsUpdated.next({ products: this.products });
   }
 
 }

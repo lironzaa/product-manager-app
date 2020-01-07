@@ -25,9 +25,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   onSubmit({ valid }): void {
-    console.log(`product id + ${this.product.id}`);
     if (valid) {
-      this.productsService.updateProduct(this.product.id, this.product);
       this.toastr.success(`Thank you for updating product ${this.product.name}`, 'Product updated!');
     }
   }
