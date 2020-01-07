@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from './../../../services/products.service';
 
 @Component({
   selector: 'app-product-control-panel',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductControlPanelComponent implements OnInit {
   selectOptions: string[];
-  constructor() { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
-    this.selectOptions = ['Name', 'Price'];
+    this.selectOptions = ['Select Value', 'Name', 'Price'];
+  }
+
+  onSelect(selectedSortOption) {
+    this.productsService.sortProducts(selectedSortOption);
   }
 
 }

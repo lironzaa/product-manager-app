@@ -44,7 +44,7 @@ export class ProductsService {
   }
 
   getProduct(index: number) {
-    const fixedIndex = (index - 1)
+    const fixedIndex = (index - 1);
     return this.products[fixedIndex];
   }
 
@@ -53,9 +53,21 @@ export class ProductsService {
   }
 
   updateProduct(index: number, product: Product) {
-    this.products[--index] = product;
     console.log(this.products);
+    const fixedIndex = (index - 1);
+    this.products[fixedIndex] = product;
+    console.log(this.products);
+    console.log(fixedIndex);
     this.productsUpdated.next({ products: this.products });
+  }
+
+  sortProducts(selectedSortOption) {
+    console.log(selectedSortOption);
+    if (selectedSortOption === 'Name') {
+      this.products.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (selectedSortOption === 'Price') {
+      this.products = this.products.sort((a, b) => a.price - b.price);
+    }
   }
 
 }

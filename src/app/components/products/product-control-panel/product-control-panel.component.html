@@ -9,7 +9,8 @@
 <div>
   <div class="form-group form-inline">
     <label for="select">Sort by</label>
-    <select class="form-control product-control-panel-item__select" id="select">
+    <select (change)="onSelect($event.target.value)" class="form-control product-control-panel-item__select"
+      id="select">
       <option *ngFor="let item of selectOptions" [value]="item">{{item}}</option>
     </select>
   </div>
