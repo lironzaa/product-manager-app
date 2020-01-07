@@ -3,6 +3,4 @@
   <app-product-item (click)="selectProductItem(i)" *ngFor="let product of products; let i = index" [product]="product">
   </app-product-item>
 </div>
-<div class="product-details-container">
-  <app-product-details *ngIf="showProductDetail"></app-product-details>
-</div>
+<app-product-details *ngIf="showProductDetail" class="product-details-container"></app-product-details>

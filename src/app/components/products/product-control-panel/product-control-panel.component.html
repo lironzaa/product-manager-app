@@ -1,14 +1,14 @@
 <div>
-  <button class="btn btn-success">+ Add</button>
+  <button class="btn btn-success custom-btn">+ Add</button>
 </div>
 <div>
   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <input class="form-control mr-sm-2 custom-input" type="search" placeholder="Search" aria-label="Search">
   </form>
 </div>
 <div>
   <div class="form-group form-inline">
-    <label for="select">Sort by</label>
+    <label class="custom-label" for="select">Sort by</label>
     <select (change)="onSelect($event.target.value)" class="form-control product-control-panel-item__select"
       id="select">
       <option *ngFor="let item of selectOptions" [value]="item">{{item}}</option>

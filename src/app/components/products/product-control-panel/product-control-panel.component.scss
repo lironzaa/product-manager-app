@@ -1,0 +1,22 @@
+.custom-label{
+  margin-right: 10px;
+}
+
+@media(max-width: 1080px) {
+    .custom-btn{
+      width: 200px; 
+      margin-right: 8px;
+  }
+  .custom-input{
+    margin: 10px 0;
+  }
+}
+
+@media(max-width: 550px) {
+  .custom-btn {
+    margin-right: 0;
+  }
+  .custom-label {
+    margin: 0 auto;
+  }
+}

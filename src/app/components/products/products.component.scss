@@ -5,3 +5,30 @@
   margin-right: 20px;
   margin-top: 20px;
 }
+
+@media(max-width: 1080px) {
+  .control-panel {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.product-details-container{
+  display: grid;
+  grid-template-columns: 40px auto 40px;
+}
+
+@media(max-width: 980px) {
+  .product-details-container {
+    grid-row: 1/2;
+  }
+}
+
+@media(max-width: 550px) {
+  .product-details-container{
+    grid-template-columns: 1fr;
+    .product-details {
+      grid-column: 1/3;
+    }
+  }
+}
