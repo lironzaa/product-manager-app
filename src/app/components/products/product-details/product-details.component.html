@@ -20,8 +20,11 @@
     </div>
     <div class="form-group">
       <label for="price">Price</label>
-      <input required min="1" type="number" class="form-control" id="price" placeholder="price"
-        [(ngModel)]="product.price" name="price" #priceInput="ngModel">
+      <div class="price-input-div">
+        <input required min="1" type="number" class="form-control custom-input" id="price" placeholder="price"
+          [(ngModel)]="product.price" name="price" #priceInput="ngModel">
+        <h4>$</h4>
+      </div>
       <div *ngIf="priceInput.touched && priceInput.invalid">
         <p class="form-text text-danger" *ngIf="priceInput.errors.required">
           Price is required

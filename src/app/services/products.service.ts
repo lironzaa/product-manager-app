@@ -42,6 +42,11 @@ export class ProductsService {
       });
   }
 
+  setProducts(products: Product[]): void {
+    this.products = products;
+    this.productsUpdated.next({ products: this.products });
+  }
+
   getProduct(index: number): Product {
     const fixedIndex = (index - 1);
     return this.products[fixedIndex];
@@ -53,11 +58,6 @@ export class ProductsService {
     } else if (selectedSortOption === 'Price') {
       this.products = this.products.sort((a, b) => a.price - b.price);
     }
-  }
-
-  setProducts(products: Product[]): void {
-    this.products = products;
-    this.productsUpdated.next({ products: this.products });
   }
 
 }

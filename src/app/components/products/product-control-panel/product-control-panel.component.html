@@ -3,7 +3,8 @@
 </div>
 <div>
   <form class="form-inline">
-    <input class="form-control mr-sm-2 custom-input" type="search" placeholder="Search" aria-label="Search">
+    <input [(ngModel)]="searchedProduct" class="form-control mr-sm-2 custom-input" type="search" placeholder="Search"
+      aria-label="Search" (keyup)="searchProduct()" name="search">
   </form>
 </div>
 <div>

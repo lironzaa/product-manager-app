@@ -1,6 +1,15 @@
 <div class="product-items-container">
-  <app-product-control-panel class="control-panel"></app-product-control-panel>
-  <app-product-item (click)="selectProductItem(i)" *ngFor="let product of products; let i = index" [product]="product">
-  </app-product-item>
+  <app-product-control-panel (onProductSearch)="searchProduct($event)" class="control-panel">
+  </app-product-control-panel>
+  <ng-container *ngIf="products.length>0; else noProduct">
+    <app-product-item (click)="selectProductItem(i)" *ngFor="let product of products; let i = index"
+      [product]="product">
+    </app-product-item>
+  </ng-container>
+  <ng-template #noProduct>
+    <div class="no-product-div">
+      <p>There is no search results</p>
+    </div>
+  </ng-template>
 </div>
 <app-product-details *ngIf="showProductDetail" class="product-details-container"></app-product-details>

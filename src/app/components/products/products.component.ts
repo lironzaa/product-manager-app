@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
+  productsOrigin: Product[] = [];
   private subscription: Subscription;
   showProductDetail: boolean = false;
   constructor(private productsService: ProductsService,
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productsService.fetchProducts();
     this.subscription = this.productsService.productsUpdated
       .subscribe((productsData: { products: Product[] }) => {
-        this.products = productsData.products;
+        this.products = this.productsOrigin = productsData.products;
       });
     this.subscription = this.productsService.showProductDetail.subscribe(
       (showProductDetail: boolean) => {
@@ -36,5 +37,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  searchProduct(searchedProduct): void {
+    if (searchedProduct.length > 0) {
+      this.products = this.productsOrigin.filter(product => {
+        return product.name.toLowerCase().match(searchedProduct.toLowerCase()) || product.description.match(searchedProduct.toLowerCase())
+      })
+    } else {
+      this.products = this.productsOrigin;
+    }
   }
 }

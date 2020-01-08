@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from './../../../services/products.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { ProductsService } from './../../../services/products.service';
 })
 export class ProductControlPanelComponent implements OnInit {
   selectOptions: string[];
+  searchedProduct: string = '';
+  @Output() onProductSearch = new EventEmitter<string>();
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
@@ -16,6 +18,10 @@ export class ProductControlPanelComponent implements OnInit {
 
   onSelect(selectedSortOption): void {
     this.productsService.sortProducts(selectedSortOption);
+  }
+
+  searchProduct(): void {
+    this.onProductSearch.emit(this.searchedProduct);
   }
 
 }
