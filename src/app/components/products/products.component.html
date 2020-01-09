@@ -2,12 +2,13 @@
   <app-product-control-panel (onProductSearch)="searchProduct($event)" class="control-panel">
   </app-product-control-panel>
   <ng-container *ngIf="products.length>0; else noProduct">
-    <app-product-item (click)="selectProductItem(i)" *ngFor="let product of products; let i = index"
-      [product]="product">
+    <app-product-item (click)="selectProductItem(product)"
+      *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: page }" [product]="product">
     </app-product-item>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
   </ng-container>
   <ng-template #noProduct>
-    <div class="no-product-div">
+    <div class="no-products-div">
       <p>There is no search results</p>
     </div>
   </ng-template>

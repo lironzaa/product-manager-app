@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   productsOrigin: Product[] = [];
   private subscription: Subscription;
   showProductDetail: boolean = false;
+  page: number = 1;
   constructor(private productsService: ProductsService,
     private router: Router) { }
 
@@ -29,14 +30,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectProductItem(index: number): void {
+  selectProductItem(clickedProduct: Product): void {
     this.productsService.showProductDetail.next(true);
-    const productId = (index + 1);
-    this.router.navigate([`products/${productId}`]);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.productsService.editedProductId.next(clickedProduct.id);
+    this.router.navigate([`products/${clickedProduct.id}`]);
   }
 
   searchProduct(searchedProduct): void {
@@ -47,5 +44,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     } else {
       this.products = this.productsOrigin;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

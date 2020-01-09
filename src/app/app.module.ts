@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { CustomFormsModule } from 'ng2-validation';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -35,7 +36,8 @@ import { ProductDetailsComponent } from './components/products/product-details/p
       positionClass: 'toast-top-right',
       preventDuplicates: true
     }),
-    CustomFormsModule
+    CustomFormsModule,
+    NgxPaginationModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent]

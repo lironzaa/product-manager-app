@@ -13,6 +13,7 @@ export class ProductsService {
   private products: Product[] = [];
   productsUpdated = new Subject<{ products: Product[] }>();
   showProductDetail = new Subject<boolean>();
+  editedProductId = new Subject<number>();
   constructor(private http: HttpClient) { }
 
   fetchProducts(): void {
@@ -47,9 +48,9 @@ export class ProductsService {
     this.productsUpdated.next({ products: this.products });
   }
 
-  getProduct(index: number): Product {
-    const fixedIndex = (index - 1);
-    return this.products[fixedIndex];
+  getProduct(productId: number): Product {
+    let indexOfProduct = this.products.findIndex(product => product.id == productId);
+    return this.products[indexOfProduct];
   }
 
   sortProducts(selectedSortOption): void {
